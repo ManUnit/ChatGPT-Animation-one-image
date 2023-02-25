@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cartoon Walking Animation</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="600" height="800"></canvas>
+  <script>
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Load the image
+    const image = new Image();
+    image.src = "508.jpg";
+    image.onload = () => {
+      // Calculate the size of each frame
+      const frameWidth = image.width / 3;
+      const frameHeight = image.height / 4;
+
+      // Define the animation loop
+      let currentFrame = 0;
+      setInterval(() => {
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw the current frame
+        const row = Math.floor(currentFrame / 3);
+        const col = currentFrame % 3;
+        ctx.drawImage(
+          image,
+          col * frameWidth,
+          row * frameHeight,
+          frameWidth,
+          frameHeight,
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+
+        // Advance to the next frame
+        currentFrame = (currentFrame + 1) % 12;
+      }, 120); // 100 milliseconds per frame
+    };
+  </script>
+</body>
+</html>
